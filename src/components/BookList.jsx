@@ -13,6 +13,7 @@ class BookList extends Component {
   handleSelect = asin => {
     this.setState({ currentAsin: asin });
   };
+
   render() {
     return (
       <Container>

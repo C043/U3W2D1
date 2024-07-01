@@ -27,9 +27,7 @@ class SingleBook extends Component {
               <Card.Title className="line-clamp m-0 fs-6">{this.props.book.title}</Card.Title>
               <Badge>{this.props.book.price}$</Badge>
             </div>
-            <Button variant="primary" className="mb-5">
-              Buy
-            </Button>
+            <Button variant="primary">Buy</Button>
           </Card.Body>
         </Card>
       </Col>
