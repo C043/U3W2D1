@@ -1,11 +1,18 @@
-import { Container, Form, InputGroup, Row } from "react-bootstrap";
+import { Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import SingleBook from "./SingleBook";
 import { Component } from "react";
+import CommentArea from "./CommentArea";
 
 class BookList extends Component {
   state = {
     query: "",
+    selected: false,
   };
+
+  handleSelect = asin => {
+    this.setState(prevState => ({ [asin]: !prevState[asin] }));
+  };
+
   render() {
     return (
       <Container>
@@ -21,20 +28,27 @@ class BookList extends Component {
             />
           </InputGroup>
         </Form>
-        <Row className="gy-4 align-items-center">
-          {this.props.genre
-            .filter(book => book.title.toLowerCase().includes(this.state.query.toLowerCase()))
-            .map(book => (
-              <SingleBook
-                key={book.asin}
-                book={{
-                  title: book.title,
-                  img: book.img,
-                  price: book.price,
-                  asin: book.asin,
-                }}
-              />
-            ))}
+        <Row className="g-4 align-items-start">
+          <Col xs={"6"}>
+            {this.props.genre
+              .filter(book => book.title.toLowerCase().includes(this.state.query.toLowerCase()))
+              .map(book => (
+                <SingleBook
+                  key={book.asin}
+                  book={{
+                    title: book.title,
+                    img: book.img,
+                    price: book.price,
+                    asin: book.asin,
+                  }}
+                  handleSelect={() => this.handleSelect(book.asin)}
+                  selected={this.state[book.asin]}
+                />
+              ))}
+          </Col>
+          <Col xs={"6"}>
+            <CommentArea />
+          </Col>
         </Row>
       </Container>
     );
