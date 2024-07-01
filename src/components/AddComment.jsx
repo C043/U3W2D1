@@ -33,6 +33,12 @@ class AddComment extends Component {
     }
   };
 
+  componentDidUpdate = prevProps => {
+    if (prevProps !== this.props) {
+      this.setState({ review: { comment: "", rate: 5, elementId: this.props.asin } });
+    }
+  };
+
   render() {
     return (
       <Form className="mx-2 mb-2" onSubmit={e => this.formHandler(e)}>
@@ -44,6 +50,7 @@ class AddComment extends Component {
             value={this.state.review.comment}
             onChange={e => this.setState({ review: { ...this.state.review, comment: e.target.value } })}
             required
+            disabled={this.props.asin === false}
           />
         </Form.Group>
 
@@ -52,6 +59,7 @@ class AddComment extends Component {
           <Form.Select
             value={this.state.review.rate}
             onChange={e => this.setState({ review: { ...this.state.review, rate: e.target.value } })}
+            disabled={this.props.asin === false}
           >
             <option>1</option>
             <option>2</option>
@@ -60,7 +68,7 @@ class AddComment extends Component {
             <option>5</option>
           </Form.Select>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" disabled={this.props.asin === false}>
           Submit
         </Button>
       </Form>

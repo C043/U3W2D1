@@ -50,7 +50,7 @@ class BookList extends Component {
               ))}
           </Col>
           <Col xs={"6"} className="sticky">
-            <CommentArea asin={this.state.comments} />
+            <CommentArea asin={this.state.currentAsin} />
           </Col>
         </Row>
       </Container>
