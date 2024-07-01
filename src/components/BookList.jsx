@@ -7,13 +7,11 @@ class BookList extends Component {
   state = {
     query: "",
     selected: false,
-    comments: false,
     currentAsin: false,
   };
 
   handleSelect = asin => {
     this.setState({ currentAsin: asin });
-    this.setState({ comments: asin });
   };
   render() {
     return (
@@ -31,23 +29,25 @@ class BookList extends Component {
           </InputGroup>
         </Form>
         <Row className="g-4 align-items-start">
-          <Col xs={"6"}>
-            {this.props.genre
-              .filter(book => book.title.toLowerCase().includes(this.state.query.toLowerCase()))
-              .map(book => (
-                <SingleBook
-                  key={book.asin}
-                  book={{
-                    title: book.title,
-                    img: book.img,
-                    price: book.price,
-                    asin: book.asin,
-                  }}
-                  handleSelect={() => this.handleSelect(book.asin)}
-                  currentAsin={this.state.currentAsin}
-                  selected={this.state[book.asin]}
-                />
-              ))}
+          <Col xs="6">
+            <Row>
+              {this.props.genre
+                .filter(book => book.title.toLowerCase().includes(this.state.query.toLowerCase()))
+                .map(book => (
+                  <SingleBook
+                    key={book.asin}
+                    book={{
+                      title: book.title,
+                      img: book.img,
+                      price: book.price,
+                      asin: book.asin,
+                    }}
+                    handleSelect={() => this.handleSelect(book.asin)}
+                    currentAsin={this.state.currentAsin}
+                    selected={this.state[book.asin]}
+                  />
+                ))}
+            </Row>
           </Col>
           <Col xs={"6"} className="sticky">
             <CommentArea asin={this.state.currentAsin} />

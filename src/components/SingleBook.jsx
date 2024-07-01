@@ -9,7 +9,7 @@ class SingleBook extends Component {
 
   render() {
     return (
-      <Col xs="12">
+      <Col xs="12" lg="6">
         <Card
           type="button"
           className={this.props.currentAsin === this.props.book.asin ? "border-danger mb-3" : "mb-3"}
