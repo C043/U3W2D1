@@ -38,7 +38,7 @@ class CommentArea extends Component {
     }
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
+  componentDidUpdate = prevProps => {
     if (prevProps !== this.props) {
       this.fetchComments();
     }
@@ -47,13 +47,14 @@ class CommentArea extends Component {
   render() {
     return (
       <>
-        {this.props.asin === false && <Alert>Selezionare un libro</Alert>}
+        {this.props.asin === false && <Alert>Select a book</Alert>}
         {this.state.hasError && (
           <Alert className="mt-3" variant="danger">
             Qualcosa è andato storto!
           </Alert>
         )}
         {this.state.isLoading ? <IsLoading /> : <CommentsList reviews={this.state.reviews} />}
+        {this.props.asin && this.state.reviews.length < 1 ? <Alert>No reviews, add one!</Alert> : ""}
         <AddComment asin={this.props.asin} />
       </>
     );
