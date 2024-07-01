@@ -1,9 +1,9 @@
-import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 const MyNav = () => (
   <Navbar expand="lg" className="bg-info">
     <Container>
-      <Navbar.Brand href="#home">My Book Shop</Navbar.Brand>
+      <Navbar.Brand href="#home">EpiBooks</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
