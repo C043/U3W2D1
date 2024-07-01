@@ -7,13 +7,14 @@ import { Alert } from "react-bootstrap";
 class CommentArea extends Component {
   state = {
     reviews: [],
-    isLoading: true,
+    isLoading: false,
     hasError: false,
   };
 
   fetchComments = async () => {
     console.log(this.props);
     try {
+      this.setState({ isLoading: true });
       const resp = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" + this.props.asin,
         {
@@ -37,13 +38,16 @@ class CommentArea extends Component {
     }
   };
 
-  componentDidMount = () => {
-    this.fetchComments();
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevProps !== this.props) {
+      this.fetchComments();
+    }
   };
 
   render() {
     return (
       <>
+        {this.props.asin === false && <Alert>Selezionare un libro</Alert>}
         {this.state.hasError && (
           <Alert className="mt-3" variant="danger">
             Qualcosa è andato storto!

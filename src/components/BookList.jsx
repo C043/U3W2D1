@@ -7,12 +7,13 @@ class BookList extends Component {
   state = {
     query: "",
     selected: false,
+    comments: false,
   };
 
-  handleSelect = asin => {
+  handleSelect = async asin => {
     this.setState(prevState => ({ [asin]: !prevState[asin] }));
+    this.setState({ comments: asin });
   };
-
   render() {
     return (
       <Container>
@@ -46,8 +47,8 @@ class BookList extends Component {
                 />
               ))}
           </Col>
-          <Col xs={"6"}>
-            <CommentArea />
+          <Col xs={"6"} className="sticky">
+            <CommentArea asin={this.state.comments} />
           </Col>
         </Row>
       </Container>
