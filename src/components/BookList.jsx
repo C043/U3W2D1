@@ -8,10 +8,11 @@ class BookList extends Component {
     query: "",
     selected: false,
     comments: false,
+    currentAsin: false,
   };
 
-  handleSelect = async asin => {
-    this.setState(prevState => ({ [asin]: !prevState[asin] }));
+  handleSelect = asin => {
+    this.setState({ currentAsin: asin });
     this.setState({ comments: asin });
   };
   render() {
@@ -43,6 +44,7 @@ class BookList extends Component {
                     asin: book.asin,
                   }}
                   handleSelect={() => this.handleSelect(book.asin)}
+                  currentAsin={this.state.currentAsin}
                   selected={this.state[book.asin]}
                 />
               ))}

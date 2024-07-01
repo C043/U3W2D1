@@ -6,10 +6,15 @@ class SingleBook extends Component {
     selected: false,
     open: false,
   };
+
   render() {
     return (
       <Col xs="12">
-        <Card type="button" className={this.props.selected ? "border-danger mb-3" : "mb-3"} style={{ width: "100%" }}>
+        <Card
+          type="button"
+          className={this.props.currentAsin === this.props.book.asin ? "border-danger mb-3" : "mb-3"}
+          style={{ width: "100%" }}
+        >
           <Card.Img
             variant="top"
             src={this.props.book.img}
